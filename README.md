@@ -19,8 +19,19 @@ In my case, I exposed an existing WordPress database by setting the DB URI to "m
 Go to town:
 
 	$ curl http://localhost:5000/site-map
-	{"/api/wp_term_relationships": "wp_term_relationshipsapi0.wp_term_relationshipsapi", "/api/wp_options": "wp_optionsapi0.wp_optionsapi", "/api/wp_comments": "wp_commentsapi0.wp_commentsapi", "/api/wp_users": "wp_usersapi0.wp_usersapi", "/api/wp_term_taxonomy": "wp_term_taxonomyapi0.wp_term_taxonomyapi", "/api/wp_posts": "wp_postsapi0.wp_postsapi", "/api/wp_usermeta": "wp_usermetaapi0.wp_usermetaapi", "/api/wp_commentmeta": "wp_commentmetaapi0.wp_commentmetaapi", "/api/wp_terms": "wp_termsapi0.wp_termsapi", "/api/wp_postmeta": "wp_postmetaapi0.wp_postmetaapi", "/api/wp_links": "wp_linksapi0.wp_linksapi"}
-	$
+	[
+      "/api/wp_term_relationships",
+      "/api/wp_options",
+      "/api/wp_comments",
+      "/api/wp_users",
+      "/api/wp_term_taxonomy",
+      "/api/wp_posts",
+      "/api/wp_usermeta",
+      "/api/wp_commentmeta",
+      "/api/wp_terms",
+      "/api/wp_postmeta",
+      "/api/wp_links"
+    ]$
 	$ curl http://localhost:5000/api/wp_posts
 	{
 	  "num_results": 11,
