@@ -9,12 +9,10 @@ Reflecting relational databases into client-rich web apps.
 
 	$ pip install -r requirements.txt
 
-2. Edit the database URI in settings.py to point to the database you want to expose via REST API.
-In my case, I exposed an existing WordPress database by setting the DB URI to "mysql://root@localhost/wordpress"
+2. Run the server process, pointing to an appropriate
+[database URI](http://docs.sqlalchemy.org/en/rel_0_9/core/engines.html#database-urls), e.g.: 
 
-3. Run the server process:
-
-	$ ./app.py
+	$ ./app.py mysql://root@localhost/wordpress
 
 Go to town:
 
@@ -68,8 +66,8 @@ Go to town:
 	}
 
 [Mirror](https://github.com/mmautner/mirror) aims to be a library 
-for literally "generating" applications from database schema ,while 
-retaining the ability to rapidly iterate on the schema's design.
+for literally "generating" applications from a database schema while 
+retaining the ability to rapidly iterate on its design.
 
 The ideal:
 

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import sys
 import json
 from flask import Flask
 from flask import render_template
@@ -10,24 +11,32 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from flask.ext.restless import APIManager
 
 app = Flask(__name__)
-app.config.from_object("settings")
 
-# instantiate SQLAlchemy DB connection:
-engine = create_engine(app.config["SQLALCHEMY_DB_URI"], convert_unicode=True)
+if len(sys.argv) > 1:
+    engine = create_engine(sys.argv[1], convert_unicode=True)
+else:
+    app.config.from_object("settings")
+    engine = create_engine(app.config["SQLALCHEMY_DB_URI"], convert_unicode=True)
 
 Base = declarative_base()
 Base.metadata.reflect(engine)
 Session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 session = scoped_session(Session)
 
-# add existing DB tables as REST endpoints
 manager = APIManager(app, session=session)
 
+def sqlalchemy_class_factory(tablename, BaseObj):
+    """create a class that inherits from a SQLAlchemy declarative base"""
+    class_name = str(''.join([t[0].upper() + t[1:] for t in table.split('_')]))
+    class_attrs = {
+        '__tablename__': str(table),
+        '__table__': BaseObj.metadata.tables[table]
+    }
+    return type(class_name, (BaseObj,), class_attrs)
+
 for table in Base.metadata.tables.keys():
-    class TablePlaceholder(Base):
-        __tablename__ = str(table)
-        __table__ = Base.metadata.tables[table]
-    blue_print = manager.create_api(TablePlaceholder, methods=['GET', 'POST', 'DELETE', 'PUT'])
+    blue_print = manager.create_api(sqlalchemy_class_factory(table, Base),
+                                    methods=['GET', 'POST', 'DELETE', 'PUT'])
 
 @app.route("/site-map")
 def site_map():
