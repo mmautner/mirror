@@ -92,3 +92,4 @@ Related projects:
 - [Backbone.js](http://backbonejs.org/) (Javascript MVC), 
 - [Andromeda](http://www.andromeda-project.org/) (DB->webapp generation library), 
 - [Pyrseas](https://geithub.com/perseas/Pyrseas) (PostgreSQL-specific schema serialization library) 
+- [sqlacodegen](https://pypi.python.org/pypi/sqlacodegen) (reflect SQL DB to SQLAlchemy declarative model syntax) 
