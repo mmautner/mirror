@@ -31,11 +31,11 @@ for table in Base.metadata.tables.keys():
 
 @app.route("/site-map")
 def site_map():
-    links = {}
+    links = []
     for rule in app.url_map.iter_rules():
         # Filter out rules we can't navigate to in a browser and rules that require parameters
         if "GET" in rule.methods and rule.defaults and len(rule.defaults) >= len(rule.arguments):
-            links[url_for(rule.endpoint)] = rule.endpoint
-    return json.dumps(links)
+            links.append(url_for(rule.endpoint))
+    return json.dumps(links, indent=2)
 
 app.run(debug=True)
