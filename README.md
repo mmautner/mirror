@@ -96,6 +96,7 @@ The ideal:
 -------
 Related projects:
 
+- [Sandman](https://github.com/jeffknupp/sandman) (More mature python lib, super-set of mirror's features)
 - [ActiveRecord](http://guides.rubyonrails.org/active_record_basics.html) (Ruby ORM)
 - [SQLAlchemy](http://www.sqlalchemy.org/) (Python ORM/SQL abstraction library),
 - [Backbone.js](http://backbonejs.org/) (Javascript MVC), 
